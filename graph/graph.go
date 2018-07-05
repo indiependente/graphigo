@@ -16,17 +16,6 @@ func (v V) Value() int {
 	return int(v)
 }
 
-//AddEdge adds an endge to the graph between the nodes u and v if not already present:
-//returns the new node and true if added or the old one and false if already present
-func (g G) AddEdge(u, v V) bool {
-	if g.AreNeighbours(u, v) {
-		return false
-	}
-	g[u] = append(g[u], v)
-	g[v] = append(g[v], u)
-	return true
-}
-
 //NewGraph returns a new empty graph of capacity n
 func NewGraph(n int) G {
 	return make(G, n)
@@ -36,6 +25,17 @@ func NewGraph(n int) G {
 func (g G) Has(v V) bool {
 	_, ok := g[v]
 	return ok
+}
+
+//AddEdge adds an endge to the graph between the nodes u and v if not already present:
+//returns true if added or false if already present
+func (g G) AddEdge(u, v V) bool {
+	if g.AreNeighbours(u, v) {
+		return false
+	}
+	g[u] = append(g[u], v)
+	g[v] = append(g[v], u)
+	return true
 }
 
 //AreNeighbours returns true if the u and v are neighbours in the graph
