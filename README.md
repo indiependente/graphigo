@@ -1,0 +1,2 @@
+# graphigo
+Golang graph library
